@@ -1,11 +1,16 @@
 from dbcps.dbh import DBH
+import anydbm
 
-class RAMDict(DBH):
+print anydbm
+
+class ADBM(DBH):
     '''
-    "Dummy" class for storing all data in memory in a dict.
+    Uses the anydbm module to store data to disc.
 
     >>> from dbcps import storage
-    >>> backend = ('ramdict', ['rotate', 43])
+    >>> from tempfile import mktemp
+    >>> fname = mktemp()[1]
+    >>> backend = ('adbm', fname, ['rotate', -91])
     >>> s = storage.Storage([backend])
     >>> s['hello'] = 'world'
     >>> s['hello']
@@ -21,25 +26,23 @@ class RAMDict(DBH):
     >>> del s
     >>> s = storage.Storage([backend])
     >>> s['blueberry']
-    Traceback (most recent call last):
-    ...
-    KeyError: 'blueberry'
+    'pancakes'
     '''
 
-    def __init__(self, encryptor, handle='ramdict'):
+    def __init__(self, path, encryptor, handle='anydbm', filemode='c'):
         DBH.__init__(self, handle, encryptor)
-        self._data = {}
+        self.db = anydbm.open(path, filemode)
 
     def get(self, k):
-        return self._data[k]
+        return self.db[k]
 
     def set(self, k, i):
-        self._data[k] = i
+        self.db[k] = i
 
     def delete(self, k):
-        del self._data[k]
+        del self.db[k]
 
     def contains(self, k):
-        return k in self._data
+        return k in self.db
 
-dbh_class = RAMDict
+dbh_class = ADBM

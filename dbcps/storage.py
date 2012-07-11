@@ -26,22 +26,35 @@ class Storage(object):
         return self.handles[self.get_handle(key)]
 
     def __getitem__(self, k):
+        if not type(k) in (str, unicode):
+            raise TypeError("Keys must be strings, got %r" % k)
         try:
             return self.get_dbh(k)[k]
         except KeyError:
             raise KeyError(k)
 
     def __setitem__(self, k, i):
+        if not type(k) in (str, unicode):
+            raise TypeError("Keys must be strings, got %r" % k)
+        if not type(i) in (str, unicode):
+            raise TypeError("Values must be strings, got %r" % i)
         try:
             self.get_dbh(k)[k] = i
         except KeyError:
             raise KeyError(k)
 
     def __delitem__(self, k):
+        if not type(k) in (str, unicode):
+            raise TypeError("Keys must be strings, got %r" % k)
         try:
             del self.get_dbh(k)[k]
         except KeyError:
             raise KeyError(k)
+
+    def __contains__(self, k):
+        if not type(k) in (str, unicode):
+            raise TypeError("Keys must be strings, got %r" % k)
+        return k in self.get_dbh(k)
 
 class NoHandleError(KeyError):
     # A handle for a certain key cannot be found.

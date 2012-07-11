@@ -1,4 +1,5 @@
 from ejtp.util import crypto
+from sys import stderr
 
 class DBH(object):
     '''
@@ -34,6 +35,10 @@ class DBH(object):
         k = self.encrypt(k)
         self.delete(k)
 
+    def __contains__(self, k):
+        k = self.encrypt(k)
+        return self.contains(k)
+
     def encrypt(self, plaintext):
         return self.encryptor.encrypt(plaintext)
 
@@ -42,5 +47,4 @@ class DBH(object):
 
 def make_dbh(dbh_type, *args):
     dbh_module = __import__('dbcps.backends.'+dbh_type, fromlist=[''])
-    print "Imported module for dbh_type %s: %r" % (dbh_type, dbh_module.__name__)
     return dbh_module.dbh_class(*args)
