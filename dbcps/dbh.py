@@ -1,4 +1,4 @@
-from ejtp.util import crypto
+from ejtp import crypto
 from sys import stderr
 
 class DBH(object):
