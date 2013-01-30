@@ -40,10 +40,10 @@ class DBH(object):
         return self.contains(k)
 
     def encrypt(self, plaintext):
-        return self.encryptor.encrypt(plaintext)
+        return self.encryptor.encrypt(plaintext).export()
 
     def decrypt(self, ciphertext):
-        return self.encryptor.decrypt(ciphertext)
+        return self.encryptor.decrypt(ciphertext).export()
 
 def make_dbh(dbh_type, *args):
     dbh_module = __import__('dbcps.backends.'+dbh_type, fromlist=[''])
