@@ -1,4 +1,4 @@
-from dbh import make_dbh
+from dbcps.dbh import make_dbh
 
 class Storage(object):
     def __init__(self, backends=[]):
@@ -15,7 +15,7 @@ class Storage(object):
         del self.handles[handle]
 
     def get_handle(self, key=''):
-        handles = self.handles.keys()
+        handles = list(self.handles.keys())
         if len(handles):
             handles.sort()
             return handles[0]
@@ -26,7 +26,7 @@ class Storage(object):
         return self.handles[self.get_handle(key)]
 
     def __getitem__(self, k):
-        if not type(k) in (str, unicode):
+        if not isinstance(k, str):
             raise TypeError("Keys must be strings, got %r" % k)
         try:
             return self.get_dbh(k)[k]
@@ -34,9 +34,9 @@ class Storage(object):
             raise KeyError(k)
 
     def __setitem__(self, k, i):
-        if not type(k) in (str, unicode):
+        if not isinstance(k, str):
             raise TypeError("Keys must be strings, got %r" % k)
-        if not type(i) in (str, unicode):
+        if not isinstance(i, str):
             raise TypeError("Values must be strings, got %r" % i)
         try:
             self.get_dbh(k)[k] = i
@@ -44,7 +44,7 @@ class Storage(object):
             raise KeyError(k)
 
     def __delitem__(self, k):
-        if not type(k) in (str, unicode):
+        if not isinstance(k, str):
             raise TypeError("Keys must be strings, got %r" % k)
         try:
             del self.get_dbh(k)[k]
@@ -52,7 +52,7 @@ class Storage(object):
             raise KeyError(k)
 
     def __contains__(self, k):
-        if not type(k) in (str, unicode):
+        if not isinstance(k, str):
             raise TypeError("Keys must be strings, got %r" % k)
         return k in self.get_dbh(k)
 

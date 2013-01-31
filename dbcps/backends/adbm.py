@@ -1,8 +1,11 @@
 from dbcps.dbh import DBH
-import anydbm
 import os
 
-print anydbm
+# Module is renamed in Python 3
+try:
+    import anydbm
+except:
+    import dbm as anydbm
 
 class ADBM(DBH):
     '''
@@ -10,8 +13,10 @@ class ADBM(DBH):
 
     >>> from dbcps import storage
     >>> from tempfile import mkstemp
-    >>> fname = mkstemp()[1]
+    >>> tempfile = mkstemp()
+    >>> fname = tempfile[1]
     >>> backend = ('adbm', fname, ['rotate', -91])
+    >>> del tempfile
     >>> s = storage.Storage([backend])
     >>> s['hello'] = 'world'
     >>> s['hello']
