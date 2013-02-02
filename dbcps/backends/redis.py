@@ -1,13 +1,12 @@
-import redis
+redislib = __import__("redis", {})
 from dbcps.dbh import DBH
-from ejtp.util import py2and3
 
 class Redis(DBH):
     '''
     Uses the redis module to store data to a key value store.
 
     >>> from dbcps import storage
-    >>> backend = ('rediscps', ['rotate', -91])
+    >>> backend = ('redis', ['rotate', -91])
     >>> s = storage.Storage([backend])
     >>> s['hello'] = 'world'
     >>> s['hello']
@@ -26,9 +25,9 @@ class Redis(DBH):
     'pancakes'
     '''
 
-    def __init__(self, encryptor, handle='rediscps', host='localhost', port=6379):
+    def __init__(self, encryptor, handle='redis', host='localhost', port=6379):
         DBH.__init__(self, handle, encryptor)
-        self.db = redis.Redis(host, port)
+        self.db = redislib.Redis(host, port)
 
     def get(self, k):
         return self.db[k]
