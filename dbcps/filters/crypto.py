@@ -27,3 +27,7 @@ class CryptoFilter(Filter):
     def __delitem__(self, k):
         k = self.encryptor.encrypt(k)
         del self.target[k]
+
+    def __contains__(self, k):
+        k = self.encryptor.encrypt(k)
+        return k in self.target

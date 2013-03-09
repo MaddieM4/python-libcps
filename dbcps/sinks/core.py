@@ -40,3 +40,10 @@ class Sink(Filter):
             del self.backend[k]
         else:
             raise NotImplementedError("Sink has no backend or __delitem__ override")
+
+    def __contains__(self, k):
+        if hasattr(self, "backend"):
+            return k in self.backend
+        else:
+            raise NotImplementedError("Sink has no backend or __contains__ override")
+

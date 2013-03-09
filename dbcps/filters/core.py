@@ -47,3 +47,5 @@ class Filter(object):
     def __delitem__(self, k):
         raise NotImplementedError("Subclasses of dbcps.filter.Filter must define __delitem__")
 
+    def __contains__(self, k):
+        raise NotImplementedError("Subclasses of dbcps.filter.Filter must define __contains__")
