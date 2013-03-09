@@ -1,4 +1,4 @@
-from dbcps.dbh import DBH
+from dbcps.sinks.core import Sink
 import os
 
 # Module is renamed in Python 3
@@ -7,7 +7,7 @@ try:
 except:
     import dbm as anydbm
 
-class ADBM(DBH):
+class ADBM(Sink):
     '''
     Uses the anydbm module to store data to disc.
 
@@ -35,23 +35,9 @@ class ADBM(DBH):
     'pancakes'
     '''
 
-    def __init__(self, path, encryptor, handle='anydbm', filemode='c'):
-        DBH.__init__(self, handle, encryptor)
+    def __init__(self, path, origin = None, filemode='c'):
+        Sink.__init__(self, origin)
         filesize = os.stat(path).st_size
         if filesize == 0:
             os.remove(path)
-        self.db = anydbm.open(path, filemode)
-
-    def get(self, k):
-        return self.db[k]
-
-    def set(self, k, i):
-        self.db[k] = i
-
-    def delete(self, k):
-        del self.db[k]
-
-    def contains(self, k):
-        return k in self.db
-
-dbh_class = ADBM
+        self.backend = anydbm.open(path, filemode)

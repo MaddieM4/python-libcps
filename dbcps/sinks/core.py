@@ -13,6 +13,10 @@ class Sink(Filter):
     def __init__(self, origin=None):
         Filter.__init__(self, origin = origin)
 
+    @property
+    def target(self):
+        return None
+
     @target.setter
     def target(self, target):
         if target != None:
