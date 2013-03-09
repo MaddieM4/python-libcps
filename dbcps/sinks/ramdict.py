@@ -1,6 +1,6 @@
-from dbcps.dbh import DBH
+from dbcps.sinks.core import Sink
 
-class RAMDict(DBH):
+class RAMDict(Sink):
     '''
     "Dummy" class for storing all data in memory in a dict.
 
@@ -26,20 +26,6 @@ class RAMDict(DBH):
     KeyError: 'blueberry'
     '''
 
-    def __init__(self, encryptor, handle='ramdict'):
-        DBH.__init__(self, handle, encryptor)
-        self._data = {}
-
-    def get(self, k):
-        return self._data[k]
-
-    def set(self, k, i):
-        self._data[k] = i
-
-    def delete(self, k):
-        del self._data[k]
-
-    def contains(self, k):
-        return k in self._data
-
-dbh_class = RAMDict
+    def __init__(self, origin=None):
+        Sink.__init__(self, origin)
+        self.backend = {}

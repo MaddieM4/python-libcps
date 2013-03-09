@@ -1,5 +1,5 @@
 import ejtp.crypto
-from dbcps.filter import Filter
+from dbcps.filters.core import Filter
 
 class CryptoFilter(Filter):
     def __init__(self, target=None, origin=None, encryptor=None):

@@ -1,7 +1,7 @@
 redislib = __import__("redis", {})
-from dbcps.dbh import DBH
+from dbcps.sinks.core import Sink
 
-class Redis(DBH):
+class Redis(Sink):
     '''
     Uses the redis module to store data to a key value store.
 
@@ -25,20 +25,6 @@ class Redis(DBH):
     'pancakes'
     '''
 
-    def __init__(self, encryptor, handle='redis', host='localhost', port=6379):
-        DBH.__init__(self, handle, encryptor)
-        self.db = redislib.Redis(host, port)
-
-    def get(self, k):
-        return self.db[k]
-
-    def set(self, k, i):
-        self.db[k] = i
-
-    def delete(self, k):
-        del self.db[k] 
-
-    def contains(self, k):
-        return k in self.db
-
-dbh_class = Redis
+    def __init__(self, origin=None, host='localhost', port=6379):
+        Sink.__init__(self, origin)
+        self.backend = redislib.Redis(host, port)
