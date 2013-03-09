@@ -5,9 +5,7 @@ class Redis(Sink):
     '''
     Uses the redis module to store data to a key value store.
 
-    >>> from dbcps import storage
-    >>> backend = ('redis', ['rotate', -91])
-    >>> s = storage.Storage([backend])
+    >>> s = Redis()
     >>> s['hello'] = 'world'
     >>> s['hello']
     'world'
@@ -20,7 +18,7 @@ class Redis(Sink):
     False
     >>> s['blueberry'] = 'pancakes'
     >>> del s
-    >>> s = storage.Storage([backend])
+    >>> s = Redis()
     >>> s['blueberry']
     'pancakes'
     '''

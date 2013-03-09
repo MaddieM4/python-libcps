@@ -4,9 +4,7 @@ class RAMDict(Sink):
     '''
     "Dummy" class for storing all data in memory in a dict.
 
-    >>> from dbcps import storage
-    >>> backend = ('ramdict', ['rotate', 43])
-    >>> s = storage.Storage([backend])
+    >>> s = RAMDict()
     >>> s['hello'] = 'world'
     >>> s['hello']
     'world'
@@ -19,7 +17,7 @@ class RAMDict(Sink):
     False
     >>> s['blueberry'] = 'pancakes'
     >>> del s
-    >>> s = storage.Storage([backend])
+    >>> s = RAMDict()
     >>> s['blueberry']
     Traceback (most recent call last):
     ...

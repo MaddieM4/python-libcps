@@ -11,13 +11,11 @@ class ADBM(Sink):
     '''
     Uses the anydbm module to store data to disc.
 
-    >>> from dbcps import storage
     >>> from tempfile import mkstemp
     >>> tempfile = mkstemp()
     >>> fname = tempfile[1]
-    >>> backend = ('adbm', fname, ['rotate', -91])
     >>> del tempfile
-    >>> s = storage.Storage([backend])
+    >>> s = ADBM(fname)
     >>> s['hello'] = 'world'
     >>> s['hello']
     'world'
@@ -30,7 +28,7 @@ class ADBM(Sink):
     False
     >>> s['blueberry'] = 'pancakes'
     >>> del s
-    >>> s = storage.Storage([backend])
+    >>> s = ADBM(fname)
     >>> s['blueberry']
     'pancakes'
     '''
