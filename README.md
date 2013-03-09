@@ -15,6 +15,11 @@ This software will eventually be LGPL-licensed, when I actually get around to
 adding license preambles and such everywhere. The author appreciates your
 patience, and capacity to tolerate general laziness/other priorities.
 
+This software recently underwent a massive restructure. It's a lot better, but
+breaks compatibility for anyone who was using it. This is still a very immature
+library, so stuff like that tends to happen, although it will get more stable
+over time.
+
 
 Dependencies
 ============
@@ -27,4 +32,5 @@ Backends supported
 ==================
 
  * [anydbm](http://docs.python.org/library/anydbm.html)
+ * [redis](https://github.com/andymccurdy/redis-py)
  * ramdict - Dummy db interface that stores all data in RAM, with no persistence.
