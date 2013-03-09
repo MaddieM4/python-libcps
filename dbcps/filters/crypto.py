@@ -1,3 +1,4 @@
+import ejtp.crypto
 from dbcps.filter import Filter
 
 class CryptoFilter(Filter):

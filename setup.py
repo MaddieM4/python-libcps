@@ -8,6 +8,7 @@ setup(
         long_description=open('README.md').read(),
         packages = [
                 'dbcps',
-                'dbcps.backends',
+                'dbcps.filters',
+                'dbcps.sinks',
         ],
 )
