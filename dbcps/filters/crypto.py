@@ -8,7 +8,7 @@ class CryptoFilter(Filter):
         >>> from __future__ import print_function
         >>> f = CryptoFilter(RAMDict(), encryptor = ['rotate', 91]);
         >>> f['shihad'] = 'band'
-        >>> print(f['shihad'])
+        >>> print(f['shihad'].decode())
         band
         >>> "shihad" in f
         True
@@ -17,7 +17,7 @@ class CryptoFilter(Filter):
         >>> del f["shihad"]
         >>> "shihad" in f
         False
-        >>> print(f['shihad'])
+        >>> print(f['shihad'].decode())
         Traceback (most recent call last):
         ...
         KeyError: 'shihad'

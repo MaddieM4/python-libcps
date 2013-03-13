@@ -15,8 +15,8 @@ class ADBM(Sink):
     >>> fname = 'tmp/adbm'
     >>> s = ADBM(fname, filemode='c')
     >>> s['hello'] = 'world'
-    >>> s['hello']
-    'world'
+    >>> print(s['hello'].decode())
+    world
     >>> 'hello' in s
     True
     >>> 'hell' in s
@@ -27,8 +27,8 @@ class ADBM(Sink):
     >>> s['blueberry'] = 'pancakes'
     >>> del s
     >>> s = ADBM(fname)
-    >>> s['blueberry']
-    'pancakes'
+    >>> print(s['blueberry'].decode())
+    pancakes
     >>> shutil.rmtree('tmp')
     '''
 
