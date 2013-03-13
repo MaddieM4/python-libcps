@@ -5,9 +5,10 @@ class CryptoFilter(Filter):
     def __init__(self, target=None, origin=None, encryptor=None):
         '''
         >>> from dbcps.sinks.ramdict import RAMDict
+        >>> from __future__ import print_function
         >>> f = CryptoFilter(RAMDict(), encryptor = ['rotate', 91]);
         >>> f['shihad'] = 'band'
-        >>> print f['shihad']
+        >>> print(f['shihad'])
         band
         >>> "shihad" in f
         True
@@ -16,7 +17,7 @@ class CryptoFilter(Filter):
         >>> del f["shihad"]
         >>> "shihad" in f
         False
-        >>> print f['shihad']
+        >>> print(f['shihad'])
         Traceback (most recent call last):
         ...
         KeyError: 'shihad'
