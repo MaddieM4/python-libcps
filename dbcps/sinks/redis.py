@@ -5,10 +5,11 @@ class Redis(Sink):
     '''
     Uses the redis module to store data to a key value store.
 
+    >>> from __future__ import print_function
     >>> s = Redis()
     >>> s['hello'] = 'world'
-    >>> s['hello']
-    'world'
+    >>> print(s['hello'].decode())
+    world
     >>> 'hello' in s
     True
     >>> 'hell' in s
@@ -19,8 +20,8 @@ class Redis(Sink):
     >>> s['blueberry'] = 'pancakes'
     >>> del s
     >>> s = Redis()
-    >>> s['blueberry']
-    'pancakes'
+    >>> print(s['blueberry'].decode())
+    pancakes
     '''
 
     def __init__(self, origin=None, host='localhost', port=6379):
