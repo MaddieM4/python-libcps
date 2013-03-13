@@ -1,5 +1,4 @@
 from dbcps.sinks.core import Sink
-import os
 
 # Module is renamed in Python 3
 try:
@@ -11,11 +10,10 @@ class ADBM(Sink):
     '''
     Uses the anydbm module to store data to disc.
 
-    >>> from tempfile import mkstemp
-    >>> tempfile = mkstemp()
-    >>> fname = tempfile[1]
-    >>> del tempfile
-    >>> s = ADBM(fname)
+    >>> import os, shutil
+    >>> os.mkdir('tmp')
+    >>> fname = 'tmp/adbm'
+    >>> s = ADBM(fname, filemode='c')
     >>> s['hello'] = 'world'
     >>> s['hello']
     'world'
@@ -31,11 +29,9 @@ class ADBM(Sink):
     >>> s = ADBM(fname)
     >>> s['blueberry']
     'pancakes'
+    >>> shutil.rmtree('tmp')
     '''
 
     def __init__(self, path, origin = None, filemode='c'):
         Sink.__init__(self, origin)
-        filesize = os.stat(path).st_size
-        if filesize == 0:
-            os.remove(path)
         self.backend = anydbm.open(path, filemode)
