@@ -19,6 +19,7 @@ along with the Python CPS library.  If not, see
 __all__ = [
     'core',
     'adbm',
+    'json',
     'ramdict',
     'redis',
 ]
