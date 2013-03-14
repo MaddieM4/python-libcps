@@ -34,10 +34,11 @@ class JSON(Sink):
     >>> del s['hello']
     >>> 'hello' in s
     False
-    >>> s['blueberry'] = 'pancakes'
+    >>> with s:
+    ...    s['blueberry'] = 'pancakes'
     >>> del s
     >>> s = JSON('tmp/json')
-    >>> print(s['blueberry'].decode())
+    >>> print(s['blueberry'])
     pancakes
     >>> shutil.rmtree('tmp')
     '''
@@ -48,7 +49,7 @@ class JSON(Sink):
         self.backend = {}
         try:
             self.reload()
-        except OSError: # File doesn't exist yet
+        except (OSError, IOError): # File doesn't exist yet
             pass
 
     def reload(self):
