@@ -66,3 +66,15 @@ class Filter(object):
 
     def __contains__(self, k):
         raise NotImplementedError("Subclasses of dbcps.filter.Filter must define __contains__")
+
+    # Flushing
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.flush()
+
+    def flush(self):
+        if hasattr(self.target, 'flush'):
+            self.target.flush()

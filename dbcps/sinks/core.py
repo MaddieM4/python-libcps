@@ -65,3 +65,5 @@ class Sink(Filter):
         else:
             raise NotImplementedError("Sink has no backend or __contains__ override")
 
+    def flush(self):
+        pass
